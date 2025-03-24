@@ -5,7 +5,7 @@ setlocal enabledelayedexpansion
 set DOMINIOS=sophosupd.com sophos.com hydra.sophos.com sophosxl.net digicert.com google.com
 
 echo ==========================================
-echo  Verificación de conectividad Sophos Relay
+echo  Verificacion de conectividad Sophos Relay
 echo ==========================================
 
 for %%D in (%DOMINIOS%) do (
