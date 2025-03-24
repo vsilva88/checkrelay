@@ -10,13 +10,13 @@ echo ==========================================
 
 for %%D in (%DOMINIOS%) do (
     echo.
-    echo 🔍 Verificando %%D
+    echo Verificando %%D
 
     ping -n 1 %%D >nul 2>&1
     if !errorlevel! neq 0 (
-        echo ❌ No se pudo resolver %%D
+        echo No se pudo resolver %%D
     ) else (
-        echo 🌐 Resolucion correcta, probando puerto 443...
+        echo Resolucion correcta, probando puerto 443...
 
         curl -s --connect-timeout 5 https://%%D >nul 2>&1
         if !errorlevel! neq 0 (
