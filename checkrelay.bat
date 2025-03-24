@@ -1,33 +1,32 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Lista de dominios a verificar
-set DOMINIOS=sophosupd.com sophos.com hydra.sophos.com sophosxl.net digicert.com google.com
+:: Lista de subdominios funcionales de Sophos
+set SITIOS=dci.sophosupd.com cdn20.sophosupd.com cdn20-utm.sophosupd.com message-relay.sophos.com api-cloudstation-us-west-2.prod.hydra.sophos.com utm.sophos.com ocsp.digicert.com crl3.digicert.com crl4.digicert.com www.google.com
 
-echo ==========================================
-echo  Verificacion de conectividad Sophos Relay
-echo ==========================================
+echo ================================================
+echo   Verificacion de subdominios de Sophos
+echo ================================================
 
-for %%D in (%DOMINIOS%) do (
+for %%S in (%SITIOS%) do (
     echo.
-    echo Verificando %%D
+    echo Verificando %%S...
 
-    ping -n 1 %%D >nul 2>&1
+    ping -n 1 %%S >nul 2>&1
     if !errorlevel! neq 0 (
-        echo No se pudo resolver %%D
+        echo [ERROR] No se pudo resolver %%S
     ) else (
-        echo Resolucion correcta, probando puerto 443...
-
-        curl -s --connect-timeout 5 https://%%D >nul 2>&1
+        echo Resolucion exitosa. Verificando puerto 443...
+        curl -s --connect-timeout 5 https://%%S >nul 2>&1
         if !errorlevel! neq 0 (
-            echo El puerto 443 no respondio en %%D
+            echo [ERROR] Puerto 443 inaccesible en %%S
         ) else (
-            echo Conexion HTTPS exitosa a %%D
+            echo [OK] Conexion HTTPS exitosa a %%S
         )
     )
 )
 
 echo.
-echo Verificacion terminada.
+echo Verificacion completada.
 pause
 endlocal
