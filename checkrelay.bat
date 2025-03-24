@@ -16,18 +16,18 @@ for %%D in (%DOMINIOS%) do (
     if !errorlevel! neq 0 (
         echo ❌ No se pudo resolver %%D
     ) else (
-        echo 🌐 Resolución correcta, probando puerto 443...
+        echo 🌐 Resolucion correcta, probando puerto 443...
 
         curl -s --connect-timeout 5 https://%%D >nul 2>&1
         if !errorlevel! neq 0 (
-            echo ❌ El puerto 443 no respondió en %%D
+            echo El puerto 443 no respondio en %%D
         ) else (
-            echo ✅ Conexión HTTPS exitosa a %%D
+            echo Conexion HTTPS exitosa a %%D
         )
     )
 )
 
 echo.
-echo 🟢 Verificación terminada.
+echo Verificacion terminada.
 pause
 endlocal
